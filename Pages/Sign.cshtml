@@ -1,8 +1,13 @@
 ﻿@page
 @model Tabler.Pages.SignModel
 @{
+    ViewData["Title"] = "Sign page";
     ViewData["NeedHeader"] = false;
     ViewData["NeedFooter"] = false;
+    if (Model.isSucceed){
+        <meta http-equiv="refresh" content="0;url=Index?user=@Model.Email">
+        ClientManager.CurrentUser = Model.Email;
+    }
 }
 
 <div class="container-tight py-4">
@@ -20,19 +25,28 @@
             <div class="card-body">
                 <div class="mb-3">
                     <label class="form-label">Email</label>
-                    <div class="input-group input-group-flat">
-                        <input type="text" class="form-control ps-1" autocomplete="on" name="Email" value="Please enter your email address" onfocus="if(value=='Please enter your email address') {value=''}">
-                    </div>
+                    @if (string.IsNullOrWhiteSpace(Model.errorMassage)){
+                        <input type="text" class="form-control" autocomplete="on" name="Email" value="@Model.Email" onfocus="if(value=='Please enter your email address') {value=''}">
+                    }
+                    else{
+                        <input type="text" class="form-control is-invalid" placeholder="Invalid State.." autocomplete="on" name="Email" value="@Model.Email" onfocus="if(value=='Please enter your email address') {value=''}">
+                        <div class="invalid-feedback">@Model.errorMassage</div>
+                    }
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
-                    <div class="input-group input-group-flat">
-                        <input type="text" class="form-control ps-1" autocomplete="on" name="Password" value="Please enter your password" onfocus="if(value=='Please enter your password') {value=''}">
-                    </div>
+                    <input type="text" class="form-control" autocomplete="on" name="Password" value="@Model.Password" onfocus="if(value=='Please enter your password') {value=''}">
                 </div>
             </div>
         </div>
         <div class="row align-items-center mt-3">
+            @if(Model.isWaiting){
+                <div class="col-4">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-indeterminate bg-green"></div>
+                    </div>
+                </div>
+            }
             <div class="col">
                 <div class="btn-list justify-content-end">
                     <a asp-page="Index" class="btn btn-link link-secondary">

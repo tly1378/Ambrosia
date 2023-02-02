@@ -5,7 +5,7 @@ namespace Tabler.Pages
 {
     public class IndexModel : PageModel
     {
-
+        public string Email { get; set; } = string.Empty;
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
