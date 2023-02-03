@@ -7,7 +7,6 @@ namespace Tabler.Pages
     public class SignModel : PageModel
     {
         public bool isWaiting = false;
-        public bool isSucceed = false;
         
         public string errorMassage = string.Empty;
         public string Email { get; set; } = "Please enter your email address";
@@ -20,8 +19,6 @@ namespace Tabler.Pages
 
         public void OnPostSignIn(string Email, string Password)
         {
-            this.Email = Email;
-            this.Password = Password;
             Console.WriteLine(
                 "New User:\n" +
                 $"\t{Email}\n" +
@@ -29,11 +26,14 @@ namespace Tabler.Pages
                 );
             if(DatabaceManager.Instance.AddUser(Email, Password))
             {
+                this.Email = Email;
+                this.Password = Password;
                 errorMassage = string.Empty;
-                isSucceed = true;
             }
             else
             {
+                this.Email = "Please enter your email address";
+                this.Password = "Please enter your password";
                 errorMassage = "The email address is already registered.";
             }
         }

@@ -4,9 +4,12 @@
     ViewData["Title"] = "Sign page";
     ViewData["NeedHeader"] = false;
     ViewData["NeedFooter"] = false;
-    if (Model.isSucceed){
-        <meta http-equiv="refresh" content="0;url=Index?user=@Model.Email">
-        ClientManager.CurrentUser = Model.Email;
+    if (Model.Email != "Please enter your email address"){
+        <script>
+            document.cookie = "useremail=@Model.Email";
+            document.cookie = "userpassword=@Model.Password";
+        </script>
+        <meta http-equiv="refresh" content="0;url=Index">
     }
 }
 
