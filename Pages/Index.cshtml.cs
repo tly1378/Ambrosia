@@ -15,20 +15,7 @@ namespace Tabler.Pages
 
         public void OnGet()
         {
-            ViewData["GameTypes"] = new string[]
-            {
-                "动作",
-                "剧情",
-                "解密",
-                "经营",
-                "模拟",
-                "建造",
-                "射击",
-                "冒险",
-                "色情",
-                "竞技",
-                "生存",
-            };
+
         }
     }
 }

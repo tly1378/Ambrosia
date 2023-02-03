@@ -1,0 +1,163 @@
+﻿@page
+@model Tabler.Pages.ListModel
+@{
+    ViewData["NeedHeader"] = true;
+    ViewData["NeedFooter"] = true;
+}
+
+<div class="page-wrapper">
+    <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+            <div class="row align-items-center">
+                <div class="col">
+                    <!-- Page pre-title -->
+                    <div class="page-pretitle">
+                        Overview
+                    </div>
+                    <h2 class="page-title">
+                        Dashboard
+                    </h2>
+                </div>
+                <!-- Page title actions -->
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <span class="d-none d-sm-inline">
+                            <a href="#" class="btn btn-white">
+                                New view
+                            </a>
+                        </span>
+                        <!-- data-bs-toggle="modal" -->
+                        <!-- 模态框(Modal)：覆盖在父窗体上的子窗体 -->
+                        <a asp-page="Typography" class="btn btn-primary d-none d-sm-inline-block" data-bs-target="#modal-report">
+                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                            Create new report!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="card">
+                <div class="card-body">
+                    <div class="divide-y">
+                        <div>
+                            <h3 class="card-title">刘慈欣《三体1：地球往事》片段节选</h3>
+                            <div class="card-subtitle">这是这篇文章的副标题</div>
+                            <p>
+                                启动游戏后，汪淼置身于一片黎明之际的荒原，荒原呈暗褐色，细节看不清楚，远方地平线上有一小片白色的曙光，其余的天空则群星闪烁。一声巨响，两座发着红光的山峰砸落到远方的大地上，整个荒原笼罩在红色光芒之中。被激起的遮天蔽日的尘埃散去后，汪淼看清了那两个顶天立地的大字:三体。
+                                随后出现了一个注册界面，汪淼用“海人”这个ID注册，然后成功登录。
+                                荒原依旧，但V装具感应服中的压缩机咝咝地启动了，汪淼感到一股逼人的寒气...
+                            </p>
+                            <div class="row align-items-center">
+                                <div class="col-auto ms-auto">
+                                    <div class="ms-auto">
+                                        <a href="#" class="text-muted">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7m-13 0a3 3 0 0 0 6 0a3 3 0 0 0 -6 0" fill="currentColor"></path>
+                                            </svg>
+                                            467
+                                        </a>
+                                        <a href="#" class="ms-3 text-muted">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-filled" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path></svg>
+                                            67
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="card-title">刘慈欣《三体2：黑暗森林》片段节选</h3>
+                            <div class="card-subtitle">这是这篇文章的副标题</div>
+                            <p>
+                                在水滴尾部的尖端，出现了一个蓝色的光环，那个光环开始很小，但很亮，使周围的一切笼罩在蓝光中，它急剧扩大，颜色由蓝变黄最后变成红色，仿佛光环不是由水滴产生的，而是前者刚从环中钻出来一样。光环在扩张的同时光度也在减弱，当它扩张到大约是水滴最大直径的一倍时消失了，在它消失的同时，第二个蓝色小光环在尖端出现，同第一个一样扩张、变色和减弱光度，并很快消失。
+                                光环就这样从水滴的尾部不断出现和扩张。频率为每秒钟两三次，在光环的推进下，水滴开始移动并急剧加速。
+                                考察队的四人没有机会看到第二个光环的出现，第一个光环出现后，在近似太阳核心的超高温中，他们都被瞬间汽化了。
+                                “螳螂”号的船体发出红光，从外部看如同纸灯笼内的蜡烛被点燃了一样...
+                            </p>
+                            <div class="row align-items-center">
+                                <div class="col-auto ms-auto">
+                                    <div class="ms-auto">
+                                        <a href="#" class="text-muted">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><circle cx="12" cy="12" r="2"></circle><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path></svg>
+                                            467
+                                        </a>
+                                        <a href="#" class="ms-3 text-muted">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path></svg>
+                                            67
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="card-title">刘慈欣《三体3：死神永生》片段节选</h3>
+                            <div class="card-subtitle">这是这篇文章的副标题</div>
+                            <p>
+                                罗辑就是以这种目光逼视着那堵白墙,逼视着那个四光年外的世界。他知道智子使得敌人能看到自己的目光.这目光带着地狱的寒气和巨石的沉重,带着牺牲一切的决绝,令敌人心悸,使他们打消一切轻率的举动。
+                                剑客的逼视总有尽头,最后的对决总会到来,但对干罗辑,对于他置身的这场宇宙决斗,出剑的时刻可能永生永世也不会出现。
+                                但也可能就在下一秒。
+                                就这样,罗辑与三体世界对视了五十四年,他由一个玩世不恭的人.变成一位面壁五壁四年的真正面壁者,一位五十四年执剑待发的地球文明的守护人。
+                                这五十四年中,罗辑一直在沉默中坚守,没有说过一句话。事实上,如果一个人十至十五年不说话,他将失去语言能力,虽能听懂但不能说了。罗辑肯定已经不会说话了,他要说的一切都在那面壁的炯炯目光中.他已经使自己变成一台威摄机器,一枚在半个世纪的没长岁月中每一秒都一触即发的地雷.维持着两个世界恐怖的平衡。
+                            </p>
+                            <div class="row align-items-center">
+                                <div class="col-auto ms-auto">
+                                    <div class="ms-auto">
+                                        <a href="#" class="text-muted">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/eye -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye-filled text-blue" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7m-13 0a3 3 0 0 0 6 0a3 3 0 0 0 -6 0" fill="currentColor"></path>
+                                            </svg>
+                                            467
+                                        </a>
+                                        <a href="#" class="ms-3 text-muted">
+                                            <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-filled text-red" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572">
+                                                </path>
+                                            </svg>
+                                            67
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex align-items-center">
+                    <p class="m-0 text-muted">Showing <span>1</span> to <span>8</span> of <span>16</span> entries</p>
+                    <ul class="pagination m-0 ms-auto">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/chevron-left -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="15 6 9 12 15 18"></polyline></svg>
+                                prev
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">
+                                next <!-- Download SVG icon from http://tabler-icons.io/i/chevron-right -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><polyline points="9 6 15 12 9 18"></polyline></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

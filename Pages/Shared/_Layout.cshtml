@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Tabler</title>
     <link rel="stylesheet" href=@("https://unpkg.com/@tabler/core@1.0.0-beta3/dist/css/tabler.min.css")>
+    <script src="~/js/site.js"></script>
 </head>
 <body>
     @if (ViewData["NeedHeader"] is bool needHeader && needHeader)
     {
         <partial name="_Header" />
+        <partial name="_Navigation" />
     }
     @RenderBody()
     @if (ViewData["NeedFooter"] is bool needFooter && needFooter)
@@ -18,6 +20,7 @@
         <partial name="_Footer" />
     }
     <script src=@("https://unpkg.com/@tabler/core@1.0.0-beta3/dist/js/tabler.min.js")></script>
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
