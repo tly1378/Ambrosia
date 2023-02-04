@@ -76,21 +76,31 @@ namespace Tabler
             return true;
         }
 
-        internal bool Verify(string email, string password)
+        internal int Verify(string email, string password)
         {
             string sql = $"SELECT * FROM users WHERE user_email = \"{email}\"";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             using(MySqlDataReader reader = cmd.ExecuteReader())
             {
-                while (reader.Read())
+                if (reader.Read())
                 {
                     if(reader.GetString("user_password") == password)
                     {
-                        return true;
+                        // 密码正确
+                        return 1;
+                    }
+                    else
+                    {
+                        // 密码错误
+                        return -1;
                     }
                 }
+                else
+                {
+                    // 账号不存在
+                    return -2;
+                }
             }
-            return false;
         }
 
         public struct Post
@@ -128,8 +138,22 @@ namespace Tabler
         private string GetBody(string post_id)
         {
             string filepath = $@"D:\temp\test\{post_id}.md";
-            Console.WriteLine(filepath);
-            return filepath;
+            string body = File.ReadAllText(filepath);
+            return body;
+        }
+
+        internal UInt64 GetLastInsertId()
+        {
+            string sql = $"SELECT LAST_INSERT_ID();";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            using (MySqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    return (UInt64)reader[0];
+                }
+            }
+            return 0;
         }
     }
 }
