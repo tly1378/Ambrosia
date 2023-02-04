@@ -6,14 +6,90 @@
     ViewData["NeedFooter"] = true;
 }
 
+<script>
+    function preview() {
+        var tittle_preview = document.getElementById("tittle_edit").value;
+        document.getElementById("tittle_preview").innerHTML = tittle_preview;
+        var tittle_preview = document.getElementById("subtittle_edit").value;
+        document.getElementById("subtittle_preview").innerHTML = tittle_preview;
+        var main_text = document.getElementById("main_edit").value;
+        document.getElementById("main_preview").innerHTML = main_text;
+    }
+
+    function word_count() {
+        document.getElementById('word_count').innerHTML = document.getElementById('main_edit').value.length + "/@(TypographyModel.MaxWordCount)";
+    }
+</script>
+
 <div class="page-body">
     <div class="container-xl">
-        <div class="card card-lg">
-            <div class="card-body ">
-                <div class="row g-4">
-
+        <div class="row row-cards">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <form method="post">
+                        <div class="card-header">
+                            <h3 class="card-title">Markdown Editor</h3>
+                            <div class="col-auto ms-auto d-print-none">
+                                <button class="btn btn-primary">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/printer -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2"></path><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4"></path><rect x="7" y="13" width="10" height="8" rx="2"></rect></svg>
+                                    发布
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label required">Email</label>
+                                <input id="input_email" name="Email" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Password</label>
+                                <input id="input_password" name="Password" type="text" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label required">Title</label>
+                                <input id="tittle_edit" name="Title" type="text" class="form-control" placeholder="Required...">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">SubTitle</label>
+                                <input id="subtittle_edit" name="Subtitle" type="text" class="form-control" placeholder="Content...">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Textarea<span id="word_count" class="form-label-description">0/@(TypographyModel.MaxWordCount)</span></label>
+                                <textarea id="main_edit" name="Text" maxlength="@(TypographyModel.MaxWordCount)" class="form-control" rows="6" placeholder="Content.." oninput="word_count()" style="height: 137px;"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h3 class="card-title">Preview</h3>
+                        <div class="col-auto ms-auto d-print-none">
+                            <button type="button" class="btn btn-primary" onclick="preview();">
+                                <!-- Download SVG icon from http://tabler-icons.io/i/printer -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M17 17h2a2 2 0 0 0 2 -2v-4a2 2 0 0 0 -2 -2h-14a2 2 0 0 0 -2 2v4a2 2 0 0 0 2 2h2"></path><path d="M17 9v-4a2 2 0 0 0 -2 -2h-6a2 2 0 0 0 -2 2v4"></path><rect x="7" y="13" width="10" height="8" rx="2"></rect></svg>
+                                预览
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-12 markdown">
+                            <h1 id="tittle_preview"></h1>
+                            <div id="subtittle_preview" class="card-subtitle"></div>
+                            <p id="main_preview"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var useremail = getCookie("useremail");
+    var userpassword = getCookie("userpassword");
+    document.getElementById("input_email").value = useremail;
+    document.getElementById("input_password").value = userpassword;
+</script>
