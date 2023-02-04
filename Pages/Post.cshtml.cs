@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Tabler.Pages
 {
-    public class TypographyModel : PageModel
+    public class PostModel : PageModel
     {
         public static ushort MaxWordCount { get; } = ushort.MaxValue;
         public string errorMassage_Title { get; set; } = string.Empty;
+        public string errorMassage_Email { get; set; } = string.Empty;
+        public string errorMassage_Password { get; set; } = string.Empty;
 
         public void OnGet()
         {
@@ -38,10 +40,17 @@ namespace Tabler.Pages
             }
 
             // 账户密码验证 
-            if (!DatabaceManager.Instance.Verify(Email, Password))
+            int result = DatabaceManager.Instance.Verify(Email, Password);
+            if (result == -1)
             {
-                errorMassage_Title = "账号密码不正确";
-                Console.WriteLine("账号密码不正确");
+                errorMassage_Email = "密码不正确";
+                Console.WriteLine("密码不正确");
+                return;
+            }
+            else if (result == -2)
+            {
+                errorMassage_Password = "账号不存在";
+                Console.WriteLine("账号不存在");
                 return;
             }
 
@@ -54,9 +63,10 @@ namespace Tabler.Pages
             }
 
             // 写入服务器
+            UInt64 postId = DatabaceManager.Instance.GetLastInsertId();
             try
             {
-                System.IO.File.WriteAllText($@"D:\temp\test\{Title}.txt", Text, Encoding.UTF8);
+                System.IO.File.WriteAllText($@"D:\temp\test\{postId}.md", Text, Encoding.UTF8);
             }
             catch
             {

@@ -1,10 +1,11 @@
 ﻿@page
-@model Tabler.Pages.SignModel
+@model Tabler.Pages.SignInModel
 @{
-    ViewData["Title"] = "Sign page";
+    ViewData["Title"] = "Sign in page";
     ViewData["NeedHeader"] = false;
     ViewData["NeedFooter"] = false;
-    if (Model.Email != "Please enter your email address"){
+    if (!string.IsNullOrWhiteSpace(Model.Email))
+    {
         <script>
             document.cookie = "useremail=@Model.Email";
             document.cookie = "userpassword=@Model.Password";
@@ -26,24 +27,37 @@
             </div>
             <div class="hr-text hr-text-center hr-text-spaceless">your data</div>
             <div class="card-body">
+                <!-- 邮箱 -->
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    @if (string.IsNullOrWhiteSpace(Model.errorMassage)){
-                        <input type="text" class="form-control" autocomplete="on" name="Email" value="@Model.Email" onfocus="if(value=='Please enter your email address') {value=''}">
+                    <label class="form-label">邮箱</label>
+                    @if (string.IsNullOrWhiteSpace(Model.errorMassage_Email))
+                    {
+                        <input type="text" class="form-control" autocomplete="on" name="Email" onfocus="if(value=='Please enter your email address') {value=''}">
                     }
-                    else{
-                        <input type="text" class="form-control is-invalid" placeholder="Invalid State.." autocomplete="on" name="Email" value="@Model.Email" onfocus="if(value=='Please enter your email address') {value=''}">
-                        <div class="invalid-feedback">@Model.errorMassage</div>
+                    else
+                    {
+                        <input type="text" class="form-control is-invalid" placeholder="Invalid.." autocomplete="on" name="Email" onfocus="if(value=='Please enter your email address') {value=''}">
+                        <div class="invalid-feedback">@Model.errorMassage_Email</div>
                     }
                 </div>
+                <!-- 密码 -->
                 <div class="mb-3">
-                    <label class="form-label">Password</label>
-                    <input type="text" class="form-control" autocomplete="on" name="Password" value="@Model.Password" onfocus="if(value=='Please enter your password') {value=''}">
+                    <label class="form-label">密码</label>
+                    @if (string.IsNullOrWhiteSpace(Model.errorMassage_Password))
+                    {
+                        <input type="text" class="form-control" autocomplete="on" name="Password" onfocus="if(value=='Please enter your password') {value=''}">
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control is-invalid" placeholder="Invalid.." autocomplete="on" name="Email" onfocus="if(value=='Please enter your email address') {value=''}">
+                        <div class="invalid-feedback">@Model.errorMassage_Password</div>
+                    }
                 </div>
             </div>
         </div>
         <div class="row align-items-center mt-3">
-            @if(Model.isWaiting){
+            @if (false)
+            {
                 <div class="col-4">
                     <div class="progress">
                         <div class="progress-bar progress-bar-indeterminate bg-green"></div>
@@ -53,10 +67,10 @@
             <div class="col">
                 <div class="btn-list justify-content-end">
                     <a asp-page="Index" class="btn btn-link link-secondary">
-                        Set up later
+                        返回主页
                     </a>
                     <button class="btn btn-primary" type="submit" asp-page-handler="SignIn">
-                        Continue
+                        登录
                     </button>
                 </div>
             </div>

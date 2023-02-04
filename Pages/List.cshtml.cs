@@ -10,7 +10,7 @@ namespace Tabler.Pages
         public void OnGet()
         {
             string keyword = Request.Query["search"];
-            if (!string.IsNullOrWhiteSpace(keyword))
+            if (string.IsNullOrWhiteSpace(keyword))
             {
                 Posts = DatabaceManager.Instance.Search(keyword);
             }

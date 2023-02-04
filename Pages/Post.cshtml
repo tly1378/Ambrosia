@@ -1,5 +1,5 @@
 ﻿@page
-@model Tabler.Pages.TypographyModel
+@model Tabler.Pages.PostModel
 @{
     ViewData["Title"] = "Typography page";
     ViewData["NeedHeader"] = true;
@@ -7,6 +7,11 @@
 }
 
 <script>
+    var useremail = getCookie("useremail");
+    if(useremail==""){
+        window.location.href = "SignUp";
+    }
+
     function preview() {
         var tittle_preview = document.getElementById("tittle_edit").value;
         document.getElementById("tittle_preview").innerHTML = tittle_preview;
@@ -17,7 +22,7 @@
     }
 
     function word_count() {
-        document.getElementById('word_count').innerHTML = document.getElementById('main_edit').value.length + "/@(TypographyModel.MaxWordCount)";
+        document.getElementById('word_count').innerHTML = document.getElementById('main_edit').value.length + "/@(PostModel.MaxWordCount)";
     }
 </script>
 
@@ -39,24 +44,24 @@
                         </div>
                         <div class="card-body">
                             <div class="mb-3">
-                                <label class="form-label required">Email</label>
-                                <input id="input_email" name="Email" type="text" class="form-control">
+                                <label class="form-label required">账号</label>
+                                <input id="input_email" name="Email" type="text" class="form-control" disabled>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label required">Password</label>
-                                <input id="input_password" name="Password" type="text" class="form-control">
+                                <label class="form-label required">密码</label>
+                                <input id="input_password" name="Password" type="text" class="form-control" disabled>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label required">Title</label>
+                                <label class="form-label required">标题</label>
                                 <input id="tittle_edit" name="Title" type="text" class="form-control" placeholder="Required...">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">SubTitle</label>
+                                <label class="form-label">副标题</label>
                                 <input id="subtittle_edit" name="Subtitle" type="text" class="form-control" placeholder="Content...">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Textarea<span id="word_count" class="form-label-description">0/@(TypographyModel.MaxWordCount)</span></label>
-                                <textarea id="main_edit" name="Text" maxlength="@(TypographyModel.MaxWordCount)" class="form-control" rows="6" placeholder="Content.." oninput="word_count()" style="height: 137px;"></textarea>
+                                <label class="form-label">正文<span id="word_count" class="form-label-description">0/@(PostModel.MaxWordCount)</span></label>
+                                <textarea id="main_edit" name="Text" maxlength="@(PostModel.MaxWordCount)" class="form-control" rows="6" placeholder="Content.." oninput="word_count()" style="height: 137px;"></textarea>
                             </div>
                         </div>
                     </form>

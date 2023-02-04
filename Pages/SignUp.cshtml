@@ -1,0 +1,65 @@
+﻿@page
+@model Tabler.Pages.SignUpModel
+@{
+    ViewData["Title"] = "Sign up page";
+    ViewData["NeedHeader"] = false;
+    ViewData["NeedFooter"] = false;
+    if (!string.IsNullOrWhiteSpace(Model.Email)){
+        <script>
+            document.cookie = "useremail=@Model.Email";
+            document.cookie = "userpassword=@Model.Password";
+        </script>
+        <meta http-equiv="refresh" content="0;url=Index">
+    }
+}
+
+<div class="container-tight py-4">
+    <div class="text-center mb-4">
+        <a href="."><img src="~/asset/images/logo.svg" height="36" alt=""></a>
+    </div>
+    <form method="post">
+        <div class="card card-md">
+            <div class="card-body text-center py-4 p-sm-5">
+                <img src="~/asset/images/sign_up_background.svg" height="128" class="mb-n2" alt="">
+                <h1 class="mt-5">Welcome to Tabler!</h1>
+                <p class="text-muted">Tabler comes with tons of well-designed components and features. Start your adventure with Tabler and make your dashboard great again.</p>
+            </div>
+            <div class="hr-text hr-text-center hr-text-spaceless">your data</div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label class="form-label">邮箱</label>
+                    @if (string.IsNullOrWhiteSpace(Model.emailErrorMassage)){
+                        <input type="text" class="form-control" autocomplete="on" name="Email" value="@Model.Email" onfocus="if(value=='Please enter your email address') {value=''}">
+                    }
+                    else{
+                        <input type="text" class="form-control is-invalid" placeholder="Invalid State.." autocomplete="on" name="Email" value="@Model.Email" onfocus="if(value=='Please enter your email address') {value=''}">
+                        <div class="invalid-feedback">@Model.emailErrorMassage</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">密码</label>
+                    <input type="text" class="form-control" autocomplete="on" name="Password" value="@Model.Password" onfocus="if(value=='Please enter your password') {value=''}">
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center mt-3">
+            @if(false){
+                <div class="col-4">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-indeterminate bg-green"></div>
+                    </div>
+                </div>
+            }
+            <div class="col">
+                <div class="btn-list justify-content-end">
+                    <a asp-page="Index" class="btn btn-link link-secondary">
+                        返回主页
+                    </a>
+                    <button class="btn btn-primary" type="submit" asp-page-handler="SignUp">
+                        注册
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
