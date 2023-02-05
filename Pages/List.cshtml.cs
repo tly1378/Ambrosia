@@ -5,19 +5,25 @@ namespace Tabler.Pages
 {
     public class ListModel : PageModel
     {
-        public List<DatabaceManager.Post> Posts { get; set; } = new List<DatabaceManager.Post>();
+        public (int from, int to) Range = (0, 10);
+        public List<DatabaceManager.Post> Posts = new List<DatabaceManager.Post>();
 
         public void OnGet()
         {
-            string keyword = Request.Query["search"];
-            if (string.IsNullOrWhiteSpace(keyword))
+            // ½á¹û·¶Î§
+            string rangeString = Request.Query["range"];
+            if (rangeString != null)
             {
-                Posts = DatabaceManager.Instance.Search(keyword);
+                var rangeStrings = rangeString.Split('-');
+                Range.from = int.Parse(rangeStrings[0]);
+                Range.to = int.Parse(rangeStrings[1]);
             }
-            else
-            {
-                Posts = new List<DatabaceManager.Post>();
-            }
+
+            // ËÑË÷¹Ø¼ü´Ê
+            string keywordString = Request.Query["search"];
+
+            // ËÑË÷
+            Posts = DatabaceManager.Instance.Search(keywordString, Range);
         }
     }
 }
