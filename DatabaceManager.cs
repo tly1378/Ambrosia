@@ -95,11 +95,8 @@ namespace Tabler
                         return -1;
                     }
                 }
-                else
-                {
-                    // 账号不存在
-                    return -2;
-                }
+
+                return -2;
             }
         }
 
@@ -113,11 +110,14 @@ namespace Tabler
             public int Follow { get; set; }
         }
 
-        internal List<Post> Search(string keyword)
+        internal List<Post> Search(string keyword, (int from, int to) range)
         {
-            string sql = $"SELECT * FROM posts";
-            MySqlCommand cmd = new MySqlCommand(sql, conn);
             List<Post> posts = new List<Post>();
+            if (!string.IsNullOrWhiteSpace(keyword))
+                return posts;
+
+            string sql = $"SELECT * FROM posts LIMIT {range.from},{range.to}";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
             using (MySqlDataReader reader = cmd.ExecuteReader())
             {
                 while (reader.Read())
