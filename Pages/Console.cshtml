@@ -1,0 +1,169 @@
+﻿@page
+@model Tabler.Pages.ConsoleModel
+@{
+}
+
+<div class="container-xl">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">控制台</h3>
+        </div>
+        <div class="card-body">
+            <form method="Post">
+                <div class="row g-2 align-items-center mb-n3">
+                    <div class="col-12 col-xl-2 mb-3 font-weight-semibold">快捷指令</div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <button class="btn btn-light w-100" asp-page-handler="GeneratePost">
+                            生成一篇帖子
+                        </button>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <button class="btn btn-light w-100" asp-page-handler="GeneratePosts">
+                            生成十篇帖子
+                        </button>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <button class="btn btn-danger w-100" asp-page-handler="DeletePosts">
+                            删除所有帖子
+                        </button>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <button class="btn btn-danger w-100" asp-page-handler="DeleteUserinfo">
+                            删除所有账号
+                        </button>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <button class="btn btn-danger w-100" asp-page-handler="DeliteLocalData">
+                            删除本地数据
+                        </button>
+                    </div>
+                    <!--
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-secondary w-100">
+                            Secondary
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-success w-100">
+                            Success
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-warning w-100">
+                            Warning
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-danger w-100">
+                            清空
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-info w-100">
+                            Info
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-light w-100">
+                            Light
+                        </a>
+                    </div>
+                    <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-dark w-100">
+                            Dark
+                        </a>
+                    </div>
+                    -->
+                </div>
+            </form>
+            <!--
+            <div class="row g-2 align-items-center mb-n3 mt-3">
+                <div class="col-12 col-xl-2 mb-3 font-weight-semibold">Active state</div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-primary active w-100">
+                        Primary
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-secondary active w-100">
+                        Secondary
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-success active w-100">
+                        Success
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-warning active w-100">
+                        Warning
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-danger active w-100">
+                        Danger
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-info active w-100">
+                        Info
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-light active w-100">
+                        Light
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-dark active w-100">
+                        Dark
+                    </a>
+                </div>
+            </div>
+            <div class="row g-2 align-items-center mb-n3 mt-3">
+                <div class="col-12 col-xl-2 mb-3 font-weight-semibold">Disabled</div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-primary disabled w-100">
+                        Primary
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-secondary disabled w-100">
+                        Secondary
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-success disabled w-100">
+                        Success
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-warning disabled w-100">
+                        Warning
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-danger disabled w-100">
+                        Danger
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-info disabled w-100">
+                        Info
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-light disabled w-100">
+                        Light
+                    </a>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                    <a href="#" class="btn btn-dark disabled w-100">
+                        Dark
+                    </a>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
