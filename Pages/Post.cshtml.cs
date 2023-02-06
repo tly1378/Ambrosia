@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
+using System.IO;
 
 namespace Tabler.Pages
 {
@@ -40,7 +44,7 @@ namespace Tabler.Pages
             }
 
             // 账户密码验证 
-            int result = DatabaceManager.Instance.Verify(Email, Password);
+            int result = DatabaseManager.Instance.Verify(Email, Password);
             if (result == -1)
             {
                 errorMassage_Email = "密码不正确";
@@ -54,26 +58,8 @@ namespace Tabler.Pages
                 return;
             }
 
-            // 写入数据库
-            if (!DatabaceManager.Instance.AddPost(Email, Title, Subtitle, Tags))
-            {
-                errorMassage_Title = "写入数据库错误";
-                Console.WriteLine("写入数据库错误");
-                return;
-            }
-
-            // 写入服务器
-            UInt64 postId = DatabaceManager.Instance.GetLastInsertId();
-            try
-            {
-                System.IO.File.WriteAllText($@"D:\temp\test\{postId}.md", Text, Encoding.UTF8);
-            }
-            catch
-            {
-                errorMassage_Title = "写入服务器错误";
-                Console.WriteLine("写入服务器错误");
-                return;
-            }
+            Post(Email, Title, Subtitle, Tags, Text, out string output);
+            errorMassage_Title = output;
 
             // 输出日志
             Console.WriteLine(
@@ -82,5 +68,39 @@ namespace Tabler.Pages
                 $"\t{Title}\n"
                 );
         }
+
+        public static void Post(
+            string Email, 
+            string Title, 
+            string Subtitle, 
+            int Tags,
+            string Text,
+            out string errorMassage)
+        {
+            errorMassage = string.Empty;
+
+            // 写入数据库
+            if (!DatabaseManager.Instance.AddPost(Email, Title, Subtitle, Tags))
+            {
+                errorMassage = "写入数据库错误";
+                Console.WriteLine("写入数据库错误");
+                return;
+            }
+
+            // 写入服务器
+            ulong postId = DatabaseManager.Instance.GetLastInsertId();
+            try
+            {
+                var path = Configuration.Instance["postsPath"];
+                System.IO.File.WriteAllText(Path.Combine(path, $"{postId}.md"), Text, Encoding.UTF8);
+            }
+            catch
+            {
+                errorMassage = "写入服务器错误";
+                Console.WriteLine("写入服务器错误");
+                return;
+            }
+        }
+
     }
 }

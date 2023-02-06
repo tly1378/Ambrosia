@@ -6,7 +6,7 @@ namespace Tabler.Pages
     public class ListModel : PageModel
     {
         public (int from, int to) Range = (0, 10);
-        public List<DatabaceManager.Post> Posts = new List<DatabaceManager.Post>();
+        public List<DatabaseManager.Post> Posts = new List<DatabaseManager.Post>();
 
         public void OnGet()
         {
@@ -23,7 +23,7 @@ namespace Tabler.Pages
             string keywordString = Request.Query["search"];
 
             // ËÑË÷
-            Posts = DatabaceManager.Instance.Search(keywordString, Range);
+            Posts = DatabaseManager.Instance.Search(keywordString, Range);
         }
     }
 }

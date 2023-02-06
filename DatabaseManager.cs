@@ -4,7 +4,7 @@ using System.Xml.Linq;
 
 namespace Tabler
 {
-    public class DatabaceManager: Singleton<DatabaceManager>
+    public class DatabaseManager: Singleton<DatabaseManager>
     {
         public MySqlConnection conn;
 
@@ -13,7 +13,7 @@ namespace Tabler
         const string uid = "karl";
         const string password = "123abc.";
 
-        public DatabaceManager()
+        public DatabaseManager()
         {
             string constr = "SERVER=" + server + ";"
                 + "DATABASE=" + database + ";"
@@ -137,12 +137,13 @@ namespace Tabler
 
         private string GetBody(string post_id)
         {
-            string filepath = $@"D:\temp\test\{post_id}.md";
+            string path = Configuration.Instance["postsPath"];
+            string filepath = Path.Combine(path, $"{post_id}.md");
             string body = File.ReadAllText(filepath);
             return body;
         }
 
-        internal UInt64 GetLastInsertId()
+        internal ulong GetLastInsertId()
         {
             string sql = $"SELECT LAST_INSERT_ID();";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -150,10 +151,16 @@ namespace Tabler
             {
                 while (reader.Read())
                 {
-                    return (UInt64)reader[0];
+                    return (ulong)reader[0];
                 }
             }
             return 0;
+        }
+
+        public int Execute(string sql)
+        {
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            return cmd.ExecuteNonQuery();
         }
     }
 }
