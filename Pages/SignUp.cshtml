@@ -2,8 +2,8 @@
 @model Tabler.Pages.SignUpModel
 @{
     ViewData["Title"] = "Sign up page";
-    ViewData["NeedHeader"] = false;
-    ViewData["NeedFooter"] = false;
+    ViewData["NoHeader"] = true;
+    ViewData["NoFooter"] = true;
     if (!string.IsNullOrWhiteSpace(Model.Email)){
         <script>
             document.cookie = "useremail=@Model.Email";
@@ -52,11 +52,11 @@
             }
             <div class="col">
                 <div class="btn-list justify-content-end">
-                    <a asp-page="Index" class="btn btn-link link-secondary">
+                    <button asp-page="Index" class="btn btn-ghost-dark">
                         返回主页
-                    </a>
-                    <button class="btn btn-primary" type="submit" asp-page="SignIn">
-                        登录
+                    </button>
+                    <button class="btn btn-ghost-dark" type="submit" asp-page="SignIn">
+                        切换至登录页
                     </button>
                     <button class="btn btn-primary" type="submit" asp-page-handler="SignUp">
                         注册

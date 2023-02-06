@@ -9,13 +9,13 @@
     <script src="~/js/site.js"></script>
 </head>
 <body>
-    @if (ViewData["NeedHeader"] is bool needHeader && needHeader)
+    @if (ViewData["NoHeader"] == null)
     {
         <partial name="_Header" />
         <partial name="_Navigation" />
     }
     @RenderBody()
-    @if (ViewData["NeedFooter"] is bool needFooter && needFooter)
+    @if (ViewData["NoFooter"] == null)
     {
         <partial name="_Footer" />
     }

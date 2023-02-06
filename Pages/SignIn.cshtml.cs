@@ -29,7 +29,7 @@ namespace Tabler.Pages
                 return;
             }
 
-            int result = DatabaceManager.Instance.Verify(email, password);
+            int result = DatabaseManager.Instance.Verify(email, password);
             if (result == 1)
             {
                 Email = email;

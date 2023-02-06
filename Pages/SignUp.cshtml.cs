@@ -24,7 +24,7 @@ namespace Tabler.Pages
                 return;
             }
 
-            if(DatabaceManager.Instance.AddUser(email, password))
+            if(DatabaseManager.Instance.AddUser(email, password))
             {
                 Email = email;
                 Password = password;
