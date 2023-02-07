@@ -92,7 +92,8 @@ namespace Tabler.Pages
             try
             {
                 var path = Configuration.Instance["postsPath"];
-                System.IO.File.WriteAllText(Path.Combine(path, $"{postId}.md"), Text, Encoding.UTF8);
+                string mdPath = Path.Combine(path, $"{postId}.md");
+                System.IO.File.WriteAllText(mdPath, Text, Encoding.UTF8);
             }
             catch
             {

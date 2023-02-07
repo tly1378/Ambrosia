@@ -1,0 +1,35 @@
+﻿@page
+@model Tabler.Pages.TextModel
+@{
+}
+<div class="page-wrapper">
+    <div class="container-xl">
+        <!-- Page title -->
+        <div class="page-header d-print-none">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h class="page-title">
+                        @Model.Post.Title
+                    </h>
+                    <h class="page-item">
+                        @Model.Post.Subtitle
+                    </h>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="card card-lg">
+                <div class="card-body ">
+                    <div class="row g-4">
+                        <div class="col-12 markdown">
+                            @Model.Post.Body
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

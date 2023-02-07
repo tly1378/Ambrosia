@@ -7,45 +7,53 @@ namespace Tabler.Pages
 {
     public class ConsoleModel : PageModel
     {
+        // 生成一篇帖子
         public void OnPostGeneratePost()
         {
             PostRandom();
         }
 
+        // 生成十篇帖子
         public void OnPostGeneratePosts()
         {
             for (int i = 0; i < 10; i++)
                 PostRandom();
         }
 
+        // 删除用户信息
         public void OnPostDeleteUserinfo()
         {
             Console.WriteLine($"Delete {DatabaseManager.Instance.Execute("delete from users")} users.");
         }
 
+        // 删除本地数据
         public void OnPostDeliteLocalData()
         {
             string path = Configuration.Instance["postsPath"];
-
+            int count = 0;
             foreach (string entries in Directory.GetFileSystemEntries(path))
             {
                 FileInfo fileInfo = new FileInfo(entries);
                 if (fileInfo.Attributes.ToString().IndexOf("ReadOnly") != -1)
                     fileInfo.Attributes = FileAttributes.Normal;
                 System.IO.File.Delete(entries);//直接删除其中的文件 
+                count++;
             }
+            Console.WriteLine($"Delete {count} posts on local.");
         }
 
+        // 删除所有帖子
         public void OnPostDeletePosts()
         {
-            Console.WriteLine($"Delete {DatabaseManager.Instance.Execute("delete from posts")} posts.");
+            int count = DatabaseManager.Instance.Execute("delete from posts");
+            Console.WriteLine($"Delete {count} posts on remote.");
         }
 
         public void PostRandom()
         {
             string Title = GetRandomString(10);
             string Subtitle = GetRandomString(10);
-            string Text = GetRandomString(500);
+            string Text = GetRandomString(2500);
             string Email = "[Auto]";
             int Tags = 0;
             PostModel.Post(Email, Title, Subtitle, Tags, Text, out _);

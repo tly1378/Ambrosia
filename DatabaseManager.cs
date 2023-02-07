@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MySql.Data.MySqlClient;
+using System;
+using System.IO;
 using System.Xml.Linq;
+using static Microsoft.Extensions.Logging.EventSource.LoggingEventSource;
 
 namespace Tabler
 {
-    public class DatabaseManager: Singleton<DatabaseManager>
+    public class DatabaseManager : Singleton<DatabaseManager>
     {
         public MySqlConnection conn;
 
@@ -21,15 +24,8 @@ namespace Tabler
                 + "PASSWORD=" + password + ";";
 
             conn = new MySqlConnection(constr);
-            try
-            {
-                conn.Open();
-                Console.WriteLine($"[MySql] Connection succeed");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[MySql] Connection failed: {ex.Message}");
-            }
+            conn.Open();
+            Console.WriteLine($"[MySql] Connection succeed");
         }
 
         internal bool AddUser(string email, string password)
@@ -41,7 +37,7 @@ namespace Tabler
             {
                 cmd.ExecuteNonQuery();
             }
-            catch(MySqlException)
+            catch (MySqlException)
             {
                 Console.WriteLine($"[MySql] The email address is already registered.");
                 return false;
@@ -80,11 +76,11 @@ namespace Tabler
         {
             string sql = $"SELECT * FROM users WHERE user_email = \"{email}\"";
             MySqlCommand cmd = new MySqlCommand(sql, conn);
-            using(MySqlDataReader reader = cmd.ExecuteReader())
+            using (MySqlDataReader reader = cmd.ExecuteReader())
             {
                 if (reader.Read())
                 {
-                    if(reader.GetString("user_password") == password)
+                    if (reader.GetString("user_password") == password)
                     {
                         // 密码正确
                         return 1;
@@ -102,6 +98,7 @@ namespace Tabler
 
         public struct Post
         {
+            public string Id { get; set; }
             public string Title { get; set; }
             public string Subtitle { get; set; }
             public string Author { get; set; }
@@ -122,25 +119,10 @@ namespace Tabler
             {
                 while (reader.Read())
                 {
-                    Post post = new Post();
-                    post.Title = reader.GetString("post_title");
-                    post.Subtitle = reader.GetString("post_subtitle");
-                    post.Author = reader.GetString("post_author");
-                    post.Body = GetBody(reader.GetString("post_id"));
-                    post.Like = reader.GetInt32("post_like");
-                    post.Follow = reader.GetInt32("post_follow");
-                    posts.Add(post);
+                    posts.Add(reader.GetPost("md"));
                 }
             }
             return posts;
-        }
-
-        private string GetBody(string post_id)
-        {
-            string path = Configuration.Instance["postsPath"];
-            string filepath = Path.Combine(path, $"{post_id}.md");
-            string body = File.ReadAllText(filepath);
-            return body;
         }
 
         internal ulong GetLastInsertId()
@@ -161,6 +143,21 @@ namespace Tabler
         {
             MySqlCommand cmd = new MySqlCommand(sql, conn);
             return cmd.ExecuteNonQuery();
+        }
+
+        internal Post Search(int id, string format)
+        {
+            string sql = $"SELECT * FROM posts WHERE post_id={id}";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            Post post = new Post();
+            using (MySqlDataReader reader = cmd.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    post = reader.GetPost(format);
+                }
+            }
+            return post;
         }
     }
 }

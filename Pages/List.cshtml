@@ -2,7 +2,6 @@
 @model Tabler.Pages.ListModel
 @{
     ViewData["Title"] = "List page";
-    var posts = Model.Posts;
 }
 
 <div class="page-wrapper">
@@ -39,11 +38,15 @@
             <div class="card">
                 <div class="card-body">
                     <div class="divide-y">
-                        @foreach (var post in posts){
+                        @foreach (var post in Model.Posts)
+                        {
                             <div>
-                                <h3 class="card-title">@post.Title</h3>
+                                <a href="Text/?id=@post.Id" style="color:#000000" class="card-title"><font size="4">@post.Title</font></a>
                                 <div class="card-subtitle">@post.Subtitle</div>
-                                <p>@post.Body</p>
+                                <div>
+                                    <p style="overflow:hidden;text-overflow:ellipsis;display: -webkit-box;-webkit-line-clamp: 5;-webkit-box-orient: vertical;">@post.Body</p>
+                                    <a href="Text/?id=@post.Id">阅读全文</a>
+                                </div>
                                 <div class="row align-items-center">
                                     <div class="col-auto ms-auto">
                                         <div class="ms-auto">
@@ -151,7 +154,8 @@
                 </div>
                 <form action="List" method="get">
                     <div class="card-footer d-flex align-items-center">
-                        <p class="m-0 text-muted">Showing <span>@Model.Range.from</span> to <span>@(Model.Range.to - 1)</span> 
+                        <p class="m-0 text-muted">
+                            Showing <span>@Model.Range.from</span> to <span>@(Model.Range.to - 1)</span>
                             @*of <span>100</span> entries*@
                         </p>
                         <ul class="pagination m-0 ms-auto">

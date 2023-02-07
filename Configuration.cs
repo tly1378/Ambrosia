@@ -37,5 +37,20 @@
             }
             throw new InvalidOperationException($"{key} is not a {nameof(T)}.");
         }
+
+        internal string GetPostPath(string postId, string extension)
+        {
+            extension = extension.Replace(".", "");
+            string path = this["postsPath"];
+            string filepath = Path.Combine(path, $"{postId}.{extension}");
+            if (File.Exists(filepath))
+            {
+                return filepath;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
     }
 }
